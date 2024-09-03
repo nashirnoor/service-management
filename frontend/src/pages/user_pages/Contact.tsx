@@ -1,4 +1,5 @@
 const Contact = () => {
+  
   return (
     <div className="bg-gray-100">
       {/* Header Section */}

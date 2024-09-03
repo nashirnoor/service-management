@@ -46,7 +46,6 @@ export const editServiceApi = async (serviceId: number, data: FormData) => {
       withCredentials: true,
     };
 
-    // Append serviceId to form data
     data.append("serviceId", serviceId.toString());
 
     return await userApi.put("/editservices", data, config);

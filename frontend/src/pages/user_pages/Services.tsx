@@ -19,17 +19,13 @@ const Services = () => {
   const ref1 = useRef<HTMLDivElement>(null);
   const isInView1 = useInView(ref1, { once: true });
   const [isLoading,setIsLoading] = useState<Boolean>(true)
-
   const [servicesData, setServicesData] = useState<serviceCardProps[]>([]);
 
   const fetchServices = async () => {
     try {
       const response = await fetchServiceApi();
-      
       if (response?.data?.success) {
-
         setServicesData(response.data.data);
-
       }
     } catch (err) {
       console.error("Error occurred during API call:", err);
@@ -37,11 +33,9 @@ const Services = () => {
     finally{
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000); 
-    }
-      
+      }, 1200); 
+    }      
   };
-
 
   useEffect(() => {
     fetchServices();
