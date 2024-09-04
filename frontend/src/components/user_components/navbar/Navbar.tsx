@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import SocialMedia from "../common/SocialMedia";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,8 +17,7 @@ const Navbar = () => {
           <NavLink to="/">
             <img
               src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=112,fit=crop,q=95/m7V8PnDoX2ur9GvK/whatsapp-image-2023-10-15-at-22.21.49_prev_ui-dOqlV8w8rnUPzopk.png"
-              alt=""
-            />
+              alt="" />
           </NavLink>
         </div>
 
@@ -29,14 +28,12 @@ const Navbar = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
+                d="M6 18L18 6M6 6l12 12"/>
             </svg>
           ) : (
             <svg
@@ -44,14 +41,12 @@ const Navbar = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+                d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           )}
         </button>
@@ -66,8 +61,7 @@ const Navbar = () => {
                     isActive ? 'border-black text-black font-semibold' : 'border-transparent text-gray-600'
                   } hover:border-black hover:text-black transition-all duration-300 mr-5`
                 }
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 Home
               </NavLink>
             </li>
@@ -79,8 +73,7 @@ const Navbar = () => {
                     isActive ? 'border-black text-black font-semibold' : 'border-transparent text-gray-600'
                   } hover:border-black hover:text-black transition-all duration-300 mr-5`
                 }
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 Services
               </NavLink>
             </li>
@@ -92,8 +85,7 @@ const Navbar = () => {
                     isActive ? 'border-black text-black font-semibold' : 'border-transparent text-gray-600'
                   } hover:border-black hover:text-black transition-all duration-300 mr-5`
                 }
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 Projects
               </NavLink>
             </li>
@@ -105,21 +97,18 @@ const Navbar = () => {
                     isActive ? 'border-black text-black font-semibold' : 'border-transparent text-gray-600'
                   } hover:border-black hover:text-black transition-all duration-300 mr-5`
                 }
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 Contact
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/about"
+              <NavLink to="/about"
                 className={({ isActive }) =>
                   `block py-2 md:py-0 px-4 border-b-2 ${
                     isActive ? 'border-black text-black font-semibold' : 'border-transparent text-gray-600'
                   } hover:border-black hover:text-black transition-all duration-300 mr-5`
                 }
-                onClick={closeMenu}
-              >
+                onClick={closeMenu}>
                 About
               </NavLink>
             </li>
@@ -135,4 +124,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const MemoisedNavbar = React.memo(Navbar)
+export default MemoisedNavbar;

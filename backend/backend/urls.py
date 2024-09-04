@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from app.views import add_service, fetch_services, fetch_single_service, edit_service, delete_service
+from app.views import add_service, fetch_services, fetch_single_service, edit_service, delete_service,project_detail,project_list_create,BannerListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,12 @@ urlpatterns = [
     path('editservice/<int:service_id>', fetch_single_service, name='fetch_single_service'),
     path('editservices/<int:service_id>', edit_service, name='edit_service'),
     path('deleteservice/<int:service_id>', delete_service, name='delete_service'),
+
+
+    path('projects/', project_list_create, name='project-list-create'),
+    path('projects/<int:pk>/', project_detail, name='project-detail'),
+
+    path('banners/', BannerListView.as_view(), name='banner-list'),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

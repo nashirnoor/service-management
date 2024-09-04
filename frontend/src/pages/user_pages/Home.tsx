@@ -1,5 +1,11 @@
 import { motion, useInView } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/swiper-bundle.css';
+import { bannerProps } from "@/components/user_components/common/service_card/type";
+import { fetchBanner } from "@/api/Route";
+
 
 const Home = () => {
   const ref1 = React.useRef(null);
@@ -12,6 +18,19 @@ const Home = () => {
   const isInView3 = useInView(ref3, { once: true });
   const isInView4 = useInView(ref4, { once: true });
   const isInView5 = useInView(ref5, { once: true });
+  const [banners, setBanners] = useState<bannerProps[]|[]>();
+
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const fetchData = async () => {
+    const response: bannerProps[] = await fetchBanner() as bannerProps[];
+    console.log(response, "Fetched projects:");
+    setBanners(response);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const container = {
     hidden: { opacity: 0 },
@@ -31,21 +50,7 @@ const Home = () => {
   };
 
   const servicesData = [
-    {
-      imgSrc:
-        "https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=503&h=264",
-      title: "Swimming Pool and Wellness Solutions",
-    },
-    {
-      imgSrc:
-        "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=400&h=400",
-      title: "Infrastructure Piping Excellence",
-    },
-    {
-      imgSrc:
-        "https://images.unsplash.com/photo-1609941699682-8188acb757df?auto=format&fit=crop&w=400&h=400",
-      title: "Sports Flooring Mastery",
-    },
+  
     {
       imgSrc:
         "https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=503&h=264",
@@ -62,55 +67,87 @@ const Home = () => {
       title: "Sports Flooring Mastery",
     },
   ];
+
   return (
     <>
-      <section className="relative pt-24 bg-cover bg-center bg-no-repeat h-screen bg-image">
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative flex items-center justify-center h-full px-12 mx-auto max-w-7xl">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.9 }}
-              className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-white md:text-6xl md:tracking-tight"
+     <section className="relative h-screen">
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="h-full"
+        onSlideChange={(swiper) => setSlideIndex(swiper.activeIndex)}
+      >
+        {banners && banners.map((banner, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="relative pt-24 bg-cover bg-center bg-no-repeat h-screen"
+              style={{ backgroundImage: `url(${banner.image})` }}
             >
-              <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
-                Alnaqsh Pools and Contracting <br /> W.L.L.
-              </span>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 2 }}
-              className="px-0 mb-8 text-lg  text-gray-100 md:text-xl lg:px-24"
-            >
-              From consulting and strategy development to implementation and
-              support, <br /> our comprehensive services can help your business
-              thrive.
-            </motion.div>
-            <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
-              <a
-                href="#_"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-black rounded-2xl sm:w-auto sm:mb-0"
-              >
-                Get Started
-                <svg
-                  className="w-4 h-4 ml-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
+              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+              <div className="relative flex items-center justify-center h-full px-12 mx-auto max-w-7xl">
+                <div className="text-center">
+                  <motion.div
+                    key={`title-${slideIndex}`}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.2 }}
+                    className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-white md:text-6xl md:tracking-tight"
+                  >
+                    <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
+                      {banner.title}
+                    </span>
+                  </motion.div>
+                  <motion.div
+                    key={`description-${slideIndex}`}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, delay: 0.4 }}
+                    className="px-0 mb-8 text-lg text-gray-100 md:text-xl lg:px-24"
+                  >
+                    {banner.description}
+                  </motion.div>
+                  <motion.div
+                    key={`button-${slideIndex}`}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.7, delay: 0.6 }}
+                    className="mb-4 space-x-0 md:space-x-2 md:mb-8"
+                  >
+                    <a
+                      href="#_"
+                      className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-black rounded-2xl sm:w-auto sm:mb-0"
+                    >
+                      Get Started
+                      <svg
+                        className="w-4 h-4 ml-1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </a>
+                  </motion.div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
 
       <div className="container mx-auto mt-16 text-black">
         <div

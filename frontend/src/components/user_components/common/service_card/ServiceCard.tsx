@@ -35,10 +35,10 @@ const ServiceCard: React.FC<serviceCardProps> = ({
         )}
       </div>
       <div className="p-6">
-        <h2 className="text-2xl font-semibold mb-2 cursor-default">
+        <h2 className="text-2xl font-semibold mb-2 cursor-default line-clamp-2">
           {title || "Untitled Service"}
         </h2>
-        <p className="text-gray-700">
+        <p className="text-gray-700 line-clamp-3">
           {description || "No description available for this service."}
         </p>
       </div>

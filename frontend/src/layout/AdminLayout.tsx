@@ -4,8 +4,7 @@ import Navbar from "../components/admin_components/navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
