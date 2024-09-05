@@ -70,8 +70,8 @@ const Contact = () => {
 
           {/* Map Section */}
           <div className="relative overflow-hidden flex items-center justify-center p-6">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15657.802823224323!2d75.88825034999999!3d11.1542272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6839a6863059baaf%3A0x6569ab277eb4473b!2sKVN%20Farm%20Rich%20-%20Factory!5e0!3m2!1sen!2sin!4v1723107204015!5m2!1sen!2sin"
+             <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7218.832349515398!2d51.43234498763451!3d25.22290396673116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45d16069f3c5c3%3A0xc35808f5067811ce!2sAl%20Naqsh%20Pools%20and%20Contracting%20WLL!5e0!3m2!1sen!2sus!4v1724048268954!5m2!1sen!2sus"
               width="100%"
               height="100%"
               loading="lazy"
